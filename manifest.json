@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "RaIn",
+  "version": "1.0.1",
+  "description": "Adds a custom 'Reply All (Domain)' button that only replies to your domain email addresses. Configure internal domain in Options.",
+  "permissions": ["storage"],
+  "options_page": "options.html",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "action": {
+    "default_icon": "icon16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "host_permissions": ["https://mail.google.com/*"]
+}
