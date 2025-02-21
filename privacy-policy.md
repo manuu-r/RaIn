@@ -1,5 +1,5 @@
 # Privacy Policy for RaIn Chrome Extension
-**Effective Date:** [Insert Date]
+**Effective Date:** 21/02/2025
 
 ## 1. Introduction
 RaIn ("the Extension") is a Chrome browser extension that enhances Gmail by adding a **"Reply All (Domain)"** button. This button ensures that users only reply to recipients within their configured company domain.
@@ -38,4 +38,4 @@ We may update this Privacy Policy from time to time. Any changes will be reflect
 
 ## 8. Contact Information
 If you have any questions or concerns about this Privacy Policy, please contact us at:
-📧 [up2datemessups@gmail.com]
+📧 Develpoer(mailto:up2datemessups@gmail.com)
