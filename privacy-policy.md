@@ -38,4 +38,4 @@ We may update this Privacy Policy from time to time. Any changes will be reflect
 
 ## 8. Contact Information
 If you have any questions or concerns about this Privacy Policy, please contact us at:
-📧 Develpoer(mailto:up2datemessups@gmail.com)
+📧 Developer(mailto:up2datemessups@gmail.com)
