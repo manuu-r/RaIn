@@ -36,6 +36,3 @@ Since RaIn does not store or transmit user data, there is no risk of external da
 ## 7. Changes to This Privacy Policy
 We may update this Privacy Policy from time to time. Any changes will be reflected here with an updated **Effective Date**.
 
-## 8. Contact Information
-If you have any questions or concerns about this Privacy Policy, please contact us at:
-📧 [Developer](up2datemessups@gmail.com)
