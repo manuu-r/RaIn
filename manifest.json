@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "RaIn",
-  "version": "1.0.1",
-  "description": "Adds a custom 'Reply All (Domain)' button that only replies to your domain email addresses. Configure internal domain in Options.",
+  "version": "1.0.2",
+  "description": "Adds a custom 'Reply All (Domain)' button and enhanced autocomplete from sent emails in Gmail.",
   "permissions": ["storage"],
   "options_page": "options.html",
   "icons": {
