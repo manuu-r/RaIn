@@ -49,27 +49,11 @@
         btn.style.display = "flex";
         btn.style.alignItems = "center";
 
-        const nativeIcon = replyAllButton.querySelector(
-          "div > div:first-child, span > div:first-child",
-        );
-        if (nativeIcon) {
-          const iconDiv = document.createElement("div");
-          iconDiv.style.marginRight = "4px";
-          iconDiv.style.width = "16px";
-          iconDiv.style.height = "16px";
-          const computedStyle = window.getComputedStyle(nativeIcon);
-          const backgroundImage = computedStyle.backgroundImage;
-          iconDiv.style.backgroundImage = backgroundImage;
-          iconDiv.style.backgroundSize = "contain";
-          iconDiv.style.backgroundPosition = "center";
-          iconDiv.style.backgroundRepeat = "no-repeat";
-          btn.appendChild(iconDiv);
-        } else {
-          const fallbackIcon = document.createElement("span");
-          fallbackIcon.innerText = "↩️";
-          fallbackIcon.style.marginRight = "4px";
-          btn.appendChild(fallbackIcon);
-        }
+        const fallbackIcon = document.createElement("span");
+        fallbackIcon.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4L12 12L20 4"></path><path d="M20 8L12 16L4 8"></path></svg>';
+        fallbackIcon.style.marginRight = "4px";
+        btn.appendChild(fallbackIcon);
 
         const textSpan = document.createElement("span");
         textSpan.innerText = "Reply All (" + domain + ")";
@@ -149,8 +133,6 @@
       "[data-hovercard-id]",
       "[data-email]",
       "div[role='listitem'] span",
-      "div[role='main'] span",
-      "div[role='dialog'] span",
     ];
 
     // This regular expression will match valid email addresses
@@ -175,20 +157,7 @@
       });
     });
 
-    const textContent = document.body.textContent;
-    const emailMatches = textContent.match(
-      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g,
-    );
-
-    if (emailMatches) {
-      emailMatches.forEach((email) => {
-        // Verify it's a legitimate email and not part of a string
-        if (emailRegex.test(email)) {
-          emailSet.add(email.toLowerCase());
-        }
-      });
-    }
-
+    // Removed text content scanning to reduce garbage duplicates
     const emails = Array.from(emailSet);
     return emails;
   }
@@ -273,7 +242,8 @@
     suggestionBox.style.position = "absolute";
     suggestionBox.style.zIndex = "10000";
     suggestionBox.style.width = `${field.offsetWidth}px`;
-    suggestionBox.style.top = `${field.offsetTop + field.offsetHeight}px`;
+    // Moved the box further down to avoid hiding text
+    suggestionBox.style.top = `${field.offsetTop + field.offsetHeight + 50}px`;
     suggestionBox.style.left = `${field.offsetLeft}px`;
 
     // Create inner container
@@ -432,15 +402,17 @@
     const emails = collectEmails();
     chrome.storage.local.set({ allEmails: emails });
     fetchSentEmails();
+    // Reduced frequency of email collection to avoid duplicates
     setInterval(() => {
       const newEmails = collectEmails();
       chrome.storage.local.get("allEmails", (result) => {
         const existingEmails = result.allEmails || [];
+        // Filter out duplicates
         const combinedEmails = [...new Set([...existingEmails, ...newEmails])];
         chrome.storage.local.set({ allEmails: combinedEmails });
       });
       fetchSentEmails();
-    }, 30000);
+    }, 60000); // Increased to 1 minute from 30 seconds
   }
 
   const observer = new MutationObserver(() => {
